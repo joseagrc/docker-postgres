@@ -2,7 +2,7 @@ ARG REPO_URL
 ARG DISTRO
 ARG DISTRO_VARIANT
 
-FROM ${REPO_URL}/solutema/${DISTRO}:${DISTRO_VARIANT}
+FROM ${REPO_URL}/${REPO_USERNAME}/${DISTRO}:${DISTRO_VARIANT}
 LABEL author="Jose Arturo Garcia <jgarcia@solutema.com>"
 LABEL vendor="Solutema, SRL"
 LABEL description="PostgreSQL multi-architecture container image"
@@ -18,8 +18,8 @@ ARG POSTGRES_ZABBIX_PLUGIN_VERSION
 ENV POSTGRES_VERSION=${POSTGRES_VERSION} \
     POSTGRES_ZABBIX_PLUGIN_VERSION=${POSTGRES_ZABBIX_PLUGIN_VERSION} \
     CONTAINER_ENABLE_MESSAGING=FALSE \
-    IMAGE_NAME="solutema/postgres" \
-    IMAGE_REPO_URL="https://github.com/solutema/docker-postgres/"
+    IMAGE_NAME="${REPO_USERNAME}/postgres" \
+    IMAGE_REPO_URL="https://${REPO_URL}/${REPO_USERNAME}/docker-postgres/"
 
 RUN source /assets/functions/00-container && \
     set -ex && \
