@@ -1,4 +1,4 @@
-name: Build Postgres Docker Image
+name: Build Postgres 16.4 Docker Image
 
 on:
   push:
