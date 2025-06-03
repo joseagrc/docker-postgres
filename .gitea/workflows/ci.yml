@@ -1,4 +1,4 @@
-name: Build Postgres 16.6 Docker Image
+name: Build Postgres 17.0 Docker Image
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     env:
       DISTRO: "alpine"
       DISTRO_VARIANT: "3.20"
-      POSTGRES_VERSION: "16.6"
+      POSTGRES_VERSION: "17.0"
       POSTGRES_ZABBIX_PLUGIN_VERSION: "7.0.3"
       build_file: Dockerfile
     runs-on: ubuntu-latest
