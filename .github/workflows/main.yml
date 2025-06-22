@@ -1,9 +1,15 @@
 name: Build Postgres Docker Image
 
 on:
+  schedule:
+    - cron: '0 4 * * *'
+    
   push:
     branches:
       - '*'
+    paths-ignore:
+      - 'README.md'
+      - '*.md'
 
 jobs:
   build:
