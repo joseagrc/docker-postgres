@@ -1,17 +1,23 @@
 name: Build Postgres 16.6 Docker Image
 
 on:
+  schedule:
+    - cron: '0 4 * * *'
+    
   push:
     branches:
       - '*'
+    paths-ignore:
+      - 'README.md'
+      - '*.md'
 
 jobs:
   build:
     env:
       DISTRO: "alpine"
-      DISTRO_VARIANT: "3.20"
+      DISTRO_VARIANT: "3.22"
       POSTGRES_VERSION: "16.6"
-      POSTGRES_ZABBIX_PLUGIN_VERSION: "7.0.3"
+      POSTGRES_ZABBIX_PLUGIN_VERSION: "7.2.9"
       build_file: Dockerfile
     runs-on: ubuntu-latest
     steps:
