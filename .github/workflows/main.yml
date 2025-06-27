@@ -12,7 +12,7 @@ jobs:
   build:
     env:
       DISTRO: "alpine"
-      DISTRO_VARIANT: "3.22"
+      DISTRO_VARIANT: "3.20"
       POSTGRES_VERSION: "17.5"
       POSTGRES_ZABBIX_PLUGIN_VERSION: "7.2.9"
       build_file: Dockerfile
