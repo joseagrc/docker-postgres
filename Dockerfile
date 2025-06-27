@@ -19,8 +19,8 @@ ARG POSTGRES_ZABBIX_PLUGIN_VERSION
 ENV POSTGRES_VERSION=${POSTGRES_VERSION} \
     POSTGRES_ZABBIX_PLUGIN_VERSION=${POSTGRES_ZABBIX_PLUGIN_VERSION} \
     CONTAINER_ENABLE_MESSAGING=FALSE \
-    IMAGE_NAME="${REPO_USERNAME}/postgres" \
-    IMAGE_REPO_URL="https://${REPO_URL}/${REPO_USERNAME}/docker-postgres/"
+    IMAGE_NAME="solutema/postgres" \
+    IMAGE_REPO_URL="https://github.com/solutema/docker-postgres/"
 
 RUN source /assets/functions/00-container && \
     set -ex && \
