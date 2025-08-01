@@ -91,7 +91,7 @@ jobs:
           context: .
           file: ./${{ env.build_file }}
           platforms: linux/amd64
-          push: true
+          push: false
           tags: ${{ steps.prep.outputs.container_images }}
           build-args: |
              REPO_URL=${{ secrets.REPO_URL }}
@@ -99,5 +99,21 @@ jobs:
              DISTRO=${{ env.DISTRO }}
              DISTRO_VARIANT=${{ env.DISTRO_VARIANT }}
              POSTGRES_VERSION=${{ env.POSTGRES_VERSION }}
-             POSTGRES_ZABBIX_PLUGIN_VERSION=${{ env.POSTGRES_ZABBIX_PLUGIN_VERSION }}             
+             POSTGRES_ZABBIX_PLUGIN_VERSION=${{ env.POSTGRES_ZABBIX_PLUGIN_VERSION }}   
+          outputs: type=docker,dest=/tmp/image.tar
+
+
+      - name: Push to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        run: |
+          docker load --input /tmp/image.tar
+          echo "${{ secrets.MY_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker push $(echo "${{ steps.prep.outputs.container_images }}" | sed "s|${{ secrets.REPO_URL }}/|ghcr.io/|")
+
+      - name: Push to Gitea Registry
+        if: github.event_name != 'pull_request'
+        run: |
+          docker load --input /tmp/image.tar
+          echo "${{ secrets.REPO_TOKEN }}" | docker login ${{ secrets.REPO_URL }} -u ${{ github.actor }} --password-stdin
+          docker push ${{ steps.prep.outputs.container_images }}
     
