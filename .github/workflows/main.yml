@@ -1,4 +1,4 @@
-name: Build Postgres 16.6 Docker Image
+name: Postgres 16.6 Docker Image
 
 on:
   schedule:
